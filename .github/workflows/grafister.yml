@@ -1,0 +1,30 @@
+name: Docker Actions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      
+      - name: hello-action
+        uses: ./actions/hello-world
+        with:
+          firstGreeting: "Learning Lab User"
+      
+      - name: meow
+        uses: ./actions/cat-facts
+        id: cat
+        
+      - name: create-issue
+        uses: ./actions/issue-maker
+        with:
+          repoToken: ${{secrets.GITHUB_TOKEN}}
+          catFact: ${{steps.cat.outputs.fact}}
+          issueTitle: "a cat fact for you"

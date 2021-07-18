@@ -14,16 +14,16 @@ jobs:
       - uses: actions/checkout@v1
       
       - name: hello-action
-        uses: ./actions/hello-world
+        uses: ./.github/actions/hello-world
         with:
           firstGreeting: "Learning Lab User"
       
       - name: meow
-        uses: ./actions/cat-facts
+        uses: ./.github/actions/cat-facts
         id: cat
         
       - name: create-issue
-        uses: ./actions/issue-maker
+        uses: ./.github/actions/issue-maker
         with:
           repoToken: ${{secrets.GITHUB_TOKEN}}
           catFact: ${{steps.cat.outputs.fact}}
